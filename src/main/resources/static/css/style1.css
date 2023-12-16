@@ -1,0 +1,88 @@
+@charset "ISO-8859-1";
+.photo-item {
+    margin-top: 500px;
+}
+
+#sub_content {
+    margin-left: 90px;
+}
+
+#sub_content1 {
+    margin-top: 40px;
+    padding: 10px;
+    margin-left: auto;
+    padding-left: 10px;
+    margin-top: 50px;
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 90px;
+    bottom: 20px;
+    left: 220px;
+
+}
+
+img {
+    margin-top: 37px;
+    margin-left: 30px;
+    height: 170px;
+    width: 160px;
+    border-radius: 0; /* Set border-radius to 0 for a square shape */
+    object-fit: cover;
+    background: #dfdfdf;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px 2px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.button2 {
+    font-size: 15px;
+}
+
+.studentphoto {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin-left: 40px;
+}
+
+.file-label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+.change-text {
+    position: absolute;
+    top: 74%;
+    left: 2.3%;
+    margin-bottom: 29px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color and opacity as needed */
+    color: white;
+    padding: 5px 37px;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.file-label:hover .change-text {
+    opacity: 1; /* Show the text on hover */
+}
+
+/* Hide the input's text and button */
+input[type="file"] {
+    display: none;
+}
+
+
