@@ -46,7 +46,9 @@ public class TestStudentController {
     CourseService courseservice;
     @MockBean
     UserService userservice;
-
+    
+    
+    // GIT HUB TESTING FOR PROJECT IN INTELLIJ IDEA 
     @Test
     public void teststudentaddView() throws Exception {
         MockHttpSession session = new MockHttpSession();
