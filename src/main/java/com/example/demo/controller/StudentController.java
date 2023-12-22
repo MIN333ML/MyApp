@@ -52,7 +52,7 @@ public class StudentController {
     private StudentService studentservice;
     @Autowired
     private CourseService courseservice;
-
+    //git hub the project
     @GetMapping(value = "/addstudent")
     public ModelAndView register6(HttpSession request, ModelMap model) {
         List<coursebean> list = courseservice.getAllCourses();
