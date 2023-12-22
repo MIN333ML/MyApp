@@ -54,7 +54,6 @@ public class TestUserController {
                 .andExpect(model().attributeExists("LGN"));
 
     }
-
     // Test for adminLogin method
     @Test
     public void testValidAdminLogin() throws Exception {

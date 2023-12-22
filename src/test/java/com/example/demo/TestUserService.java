@@ -194,7 +194,8 @@ public class TestUserService {
 //       Userbean foundUser = userservice.getUserEmailByEmail("test@example.com");
 //
 //       // Verifying that UserRepository.findByEmail was called with the correct argument
-//
+
+
 //       // Asserting the result of the method
 //       assertEquals("test@example.com", foundUser.getEmail());
 //       // Add more assertions as needed for other user properties
