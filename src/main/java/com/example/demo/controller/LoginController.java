@@ -19,8 +19,10 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -136,8 +138,8 @@ public class LoginController {
 
     @PostMapping(value = "/newpwd1")
     public String changepwd1(@ModelAttribute("pwd") Userbean bean, @RequestParam("password") String password, @RequestParam("newpassword1") String newpassword, @RequestParam("userid") String userid, ModelMap map, HttpSession session, RedirectAttributes redirect) {
-        Userbean oldpwd = userservice.getuserPasswordbyUserId(userid);
-        if (oldpwd != null && oldpwd.getPassword().equals(password)) {
+        String password1 = userservice.getuserPasswordbyUserId(userid);
+        if (password1 != null && password1.equals(password)) {
             bean.setPassword(newpassword);
             userservice.updatePassword(bean.getPassword(), userid);
 
@@ -208,11 +210,10 @@ public class LoginController {
 
     @PostMapping(value = "/adminnewpwd1")
     public String adminchangepwd1(@ModelAttribute("pwd1") Userbean bean, @RequestParam("password") String password, @RequestParam("newpassword1") String newpassword, @RequestParam("userid") String userid, ModelMap map, HttpSession session, RedirectAttributes redirect) {
-        Userbean oldpwd = userservice.getuserPasswordbyUserId(userid);
-        if (oldpwd != null && oldpwd.getPassword().equals(password)) {
+        String password1= userservice.getuserPasswordbyUserId(userid);
+        if (password1 != null && password1.equals(password)) {
             bean.setPassword(newpassword);
             userservice.updatePassword(bean.getPassword(), userid);
-
             session.setAttribute("id", userid);
             return "redirect:/welcome";
 
@@ -220,5 +221,35 @@ public class LoginController {
         redirect.addFlashAttribute("oldpwderor", "Old Password is InCorrect!!!");
         return "redirect:/adminnewpwd?id=" + userid;
     }
-
+    
+//    @GetMapping(value="/getdata")
+//    @ResponseBody
+//    @CrossOrigin
+//    public String getData()  {
+//    	return "HELLO FETCH";
+//    }
+    @GetMapping(value="/getdata")
+    @ResponseBody
+    @CrossOrigin
+    public List<Userbean> getData()  {
+    	//return "{\"message\" : \"HELLO FETCH\"}";
+    	Userbean  myobj= new Userbean();
+    	myobj.setUserid("1");
+    	myobj.setName("Min");
+    	myobj.setEmail("ddd");
+    	myobj.setPassword("111");
+    	myobj.setRole("User");
+    	Userbean  myobj1= new Userbean();
+    	myobj1.setUserid("11");
+    	myobj1.setName("Min1");
+    	myobj1.setEmail("ddd1");
+    	myobj1.setPassword("1111");
+    	myobj1.setRole("User1");
+    	List<Userbean> list=new ArrayList<>();
+    	list.add(myobj);
+    	list.add(myobj1);
+    	return list;
+//    	return myobj;
+    	
+    }
 }

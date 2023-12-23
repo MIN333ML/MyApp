@@ -22,7 +22,7 @@ public interface UserRepository extends CrudRepository<Userbean, String> {
     String findPasswordByEmail(String email);
 
     @Query("SELECT u.password FROM Userbean u WHERE u.userid = ?1")
-    Userbean findPasswordByUserid(String userid);
+    String findPasswordByUserid(String userid);
 
     @Query("select u.userid FROM Userbean u WHERE u.userid =?1")
     Optional<Userbean> findEmailById(String userid);

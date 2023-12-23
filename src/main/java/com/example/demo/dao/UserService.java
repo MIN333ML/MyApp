@@ -47,8 +47,9 @@ public class UserService {
         return password;
     }
 
-    public Userbean getuserPasswordbyUserId(String userid) {
-        return userrepository.findPasswordByUserid(userid);
+    public String getuserPasswordbyUserId(String userid) {
+        String password= userrepository.findPasswordByUserid(userid);
+        return password;
     }
 
     public Optional<Userbean> getUserByUserId(String userid) {

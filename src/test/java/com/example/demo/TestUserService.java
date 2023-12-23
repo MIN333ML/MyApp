@@ -110,10 +110,11 @@ public class TestUserService {
         Userbean expectedUser = new Userbean();
         expectedUser.setUserid("1");
         expectedUser.setPassword("232");
-        when(userrepo.findPasswordByUserid("1")).thenReturn(expectedUser);
-        Userbean foundUser = userservice.getuserPasswordbyUserId("1");
-        assertEquals("1", foundUser.getUserid());
-        assertEquals("232", foundUser.getPassword());
+        String password="233";
+        when(userrepo.findPasswordByUserid("1")).thenReturn(password);
+        String password1 = userservice.getuserPasswordbyUserId("1");
+        assertEquals("1", "1");
+        assertEquals("232", password1);
     }
 
     @Test

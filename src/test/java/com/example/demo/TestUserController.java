@@ -243,7 +243,8 @@ public class TestUserController {
         Userbean mockUser = new Userbean();
         mockUser.setPassword(password);
         // Test for  correct password
-        when(userService.getuserPasswordbyUserId(userId)).thenReturn(mockUser);
+       
+        when(userService.getuserPasswordbyUserId(userId)).thenReturn(password);
         mockMvc.perform(post("/newpwd1")
                 .param("password", password)
                 .param("newpassword1", newPassword)
@@ -369,7 +370,7 @@ public class TestUserController {
         Userbean mockUser = new Userbean();
         mockUser.setPassword(password);
         // Test for  correct password
-        when(userService.getuserPasswordbyUserId(userId)).thenReturn(mockUser);
+        when(userService.getuserPasswordbyUserId(userId)).thenReturn(password);
         mockMvc.perform(post("/adminnewpwd1")
                 .param("password", password)
                 .param("newpassword1", newPassword)
