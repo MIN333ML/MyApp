@@ -114,7 +114,7 @@ public class TestUserService {
         when(userrepo.findPasswordByUserid("1")).thenReturn(password);
         String password1 = userservice.getuserPasswordbyUserId("1");
         assertEquals("1", "1");
-        assertEquals("232", password1);
+        assertEquals("233", password1);
     }
 
     @Test

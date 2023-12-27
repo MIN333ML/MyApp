@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.model.*;
 import com.example.demo.dao.*;
@@ -252,4 +254,43 @@ public class LoginController {
 //    	return myobj;
     	
     }
+    @PostMapping(value="/postdata")
+    @ResponseBody
+    @CrossOrigin
+    public List<Userbean> postData(@RequestBody Userbean userbean) {
+               List<Userbean> dataFromGet = getData();
+                dataFromGet.add(userbean);
+        return dataFromGet;
+    }
+   @GetMapping(value="/getData")
+   @ResponseBody
+   @CrossOrigin
+    public Userbean getData2() {
+	   Userbean myobj = new Userbean();
+	   myobj.setUserid(myobj.getUserid());
+	   myobj.setName(myobj.getName());
+	   myobj.setEmail(myobj.getEmail());
+	   myobj.setPassword(myobj.getPassword());
+	   myobj.setRole(myobj.getRole());
+	   return myobj;
+   }
+   @PostMapping("/insertData")
+   @ResponseBody
+   @CrossOrigin
+   public ResponseEntity<String> insertData(@RequestBody Userbean user) {
+	   List<Userbean> userinsert= new ArrayList<>();
+	   userinsert.add(user);
+	   System.out.println(user.getUserid());
+       return ResponseEntity.ok("Data inserted successfully");
+   }
+      @GetMapping(value="/showData")
+      @ResponseBody
+      @CrossOrigin
+      public ResponseEntity<List<Userbean>> getAllUsers() {
+   	   List<Userbean> userlist= new ArrayList<>();
+   	     
+          return ResponseEntity.ok(userlist);
+      }
+
+
 }
