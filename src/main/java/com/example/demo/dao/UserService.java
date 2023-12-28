@@ -15,7 +15,7 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     UserRepository userrepository;
-
+// User Github desktop
     public Userbean getuserbyEmailAndPassword(String email, String password) {
         return userrepository.findByEmailAndPassword(email, password);
     }
@@ -28,6 +28,7 @@ public class UserService {
     public int updateuser(String name, String email, String role, String userid) {
         return userrepository.updateNameAndEmailAndRoleByUserId(name, email, role, userid);
     }
+
 
     public int updatePassword(String password, String userid) {
         return userrepository.updatePasswordByUserId(password, userid);
