@@ -9,10 +9,12 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import com.example.demo.model.*;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -97,6 +99,8 @@ public class LoginController {
             return "studentregister";
         }
         bean.setUserid(userid);
+
+       bean.setPassword(bean.getPassword());
         userservice.save(bean);
         return "redirect:/";
     }
@@ -283,14 +287,34 @@ public class LoginController {
 	   System.out.println(user.getUserid());
        return ResponseEntity.ok("Data inserted successfully");
    }
-      @GetMapping(value="/showData")
-      @ResponseBody
-      @CrossOrigin
-      public ResponseEntity<List<Userbean>> getAllUsers() {
-   	   List<Userbean> userlist= new ArrayList<>();
-   	     
-          return ResponseEntity.ok(userlist);
-      }
+   @PostMapping("/insertData1")
+   @ResponseBody
+   @CrossOrigin
+   public ResponseEntity<?> insertData1(@RequestBody Userbean user) {
+       String us_id = userservice.generateUserId();
 
+       Userbean existingUser = userservice.getUserEmailByEmail(user.getEmail());
+       if (existingUser != null) {
+           CustomResponse response = new CustomResponse("Error", "Email already exists");
+           return ResponseEntity.status(HttpStatus.OK).body(response);
+       } else {
+           user.setUserid(us_id); 
+           userservice.save(user);
+           return ResponseEntity.ok(us_id);
+       }
+   }
+        @GetMapping(value="/showData")
+        @ResponseBody
+        @CrossOrigin
+        public ResponseEntity<List<Userbean>> getAllUsers() {
+            List<Userbean> userlist = userservice.getAllUsers();
+            
+            if (userlist.isEmpty()) {
+                // Handle case where no data is found
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.ok(userlist);
+            }
+        }
 
 }
